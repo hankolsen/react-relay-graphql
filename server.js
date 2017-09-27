@@ -7,27 +7,12 @@ const app = express();
 
 app.use(express.static('public'));
 
-let db;
-MongoClient.connect('mongodb://localhost/rgr', (err, database) => {
-	if (err) {
-		throw err;
-	}
-
-	db = database;
+(async () => {
+  let db = await MongoClient.connect('mongodb://localhost/rgr');
   app.use('/graphql', GraphQLHTTP({
     schema: schema(db),
     graphiql: true
   }));
 
   app.listen(3000, () => console.log('Listining on port 3000'));
-});
-
-app.get('/data/links', (req, res) => {
-	db.collection('links').find({}).toArray((err, links) => {
-		if (err) {
-			throw err;
-		}
-
-		res.json(links);
-	});
-});
+})();

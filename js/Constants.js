@@ -1,3 +1,3 @@
-export let ActionTypes = {
+export const ActionTypes = {
 	RECEIVE_LINKS: 'RECEIVE_LINKS'
 };

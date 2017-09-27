@@ -3,7 +3,7 @@ import React from 'react';
 import API from '../API';
 import LinkStore from '../stores/LinkStore';
 
-let _getAppStore = () => {
+const _getAppStore = () => {
 	return { links: LinkStore.getAll() };
 };
 
@@ -22,7 +22,7 @@ export default class Main extends React.Component {
 		this.setState(_getAppStore());
 	}
 	render() {
-		let content = this.state.links.map(link => {
+		const content = this.state.links.map(link => {
 			return <li key={link._id}>
 				<a href={link.url}>{link.title}</a>
 			</li>;

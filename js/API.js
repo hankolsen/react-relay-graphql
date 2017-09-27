@@ -8,7 +8,7 @@ const query = `query {
   } 
 }`;
 
-let API = {
+const API = {
 	fetchLinks() {
 		console.log('1. in API');
 		fetch('/graphql', {

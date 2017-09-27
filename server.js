@@ -3,7 +3,7 @@ import schema from './data/schema';
 import GraphQLHTTP from 'express-graphql';
 import { MongoClient } from 'mongodb';
 
-let app = express();
+const app = express();
 
 app.use(express.static('public'));
 

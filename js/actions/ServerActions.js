@@ -1,6 +1,6 @@
 import AppDispatcher from '../AppDispatcher';
 import { ActionTypes } from '../Constants';
-let ServerActions = {
+const ServerActions = {
 	receiveLinks(links) {
 		console.log('2. In receiveLinks');
 		AppDispatcher.dispatch({

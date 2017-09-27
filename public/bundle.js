@@ -21313,7 +21313,7 @@ exports.default = Main;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _ServerActions = __webpack_require__(36);
@@ -21322,15 +21322,23 @@ var _ServerActions2 = _interopRequireDefault(_ServerActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var query = 'query { \n  links { \n    _id \n    title \n    url \n  } \n}';
+
 var API = {
-	fetchLinks: function fetchLinks() {
-		console.log('1. in API');
-		fetch('/data/links').then(function (response) {
-			return response.json();
-		}).then(function (data) {
-			_ServerActions2.default.receiveLinks(data);
-		});
-	}
+  fetchLinks: function fetchLinks() {
+    console.log('1. in API');
+    fetch('/graphql', {
+      method: 'POST',
+      body: JSON.stringify({ query: query }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (resp) {
+      _ServerActions2.default.receiveLinks(resp.data.links);
+    });
+  }
 };
 
 exports.default = API;

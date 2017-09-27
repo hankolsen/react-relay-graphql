@@ -5,11 +5,6 @@ import { MongoClient } from 'mongodb';
 
 let app = express();
 
-app.use('/graphql', GraphQLHTTP({
-	schema,
-	graphiql: true
-}));
-
 app.use(express.static('public'));
 
 let db;
@@ -19,7 +14,12 @@ MongoClient.connect('mongodb://localhost/rgr', (err, database) => {
 	}
 
 	db = database;
-	app.listen(3000, () => console.log('Listining on port 3000'));
+  app.use('/graphql', GraphQLHTTP({
+    schema: schema(db),
+    graphiql: true
+  }));
+
+  app.listen(3000, () => console.log('Listining on port 3000'));
 });
 
 app.get('/data/links', (req, res) => {

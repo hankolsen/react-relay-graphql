@@ -8,15 +8,27 @@ import Link from './types/link';
 
 const Schema = (db) => {
 
-  const schema = new GraphQLSchema({
+  const store = {};
+
+	const storeType = new GraphQLObjectType({
+		name: 'Store',
+		fields: () => ({
+			links: {
+				type: new GraphQLList(Link),
+				resolve: () =>  db.collection('links').find({}).toArray()
+			}
+		})
+	});
+
+	const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
       name: 'Query',
       fields: () => ({
-        links: {
-          type: new GraphQLList(Link),
-          resolve: () =>  db.collection('links').find({}).toArray()
+        store: {
+          type: storeType,
+          resolve: () => store
         }
-      })
+    })
     })
   });
 

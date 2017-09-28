@@ -1,3 +1,6 @@
 {
-	  "presets": ["env", "react"]
+  "plugins": [
+    [ "relay", { "schema": "./data/schema.json" } ]
+  ],
+  "presets": ["env", "react"]
 }
